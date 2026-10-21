@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>New Day RP - لوحة الإدارة</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #090d16;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    header, .card {
+      background: #162035;
+      border: 1px solid #293856;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+    h1, h2 { color: #38bdf8; }
+    input, select, button {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+    input, select {
+      background: #0d1424;
+      color: white;
+      border: 1px solid #3b4d75;
+    }
+    button {
+      background: #0284c7;
+      color: white;
+      border: none;
+      font-weight: bold;
+    }
+    .danger { background: #dc2626; }
+    .notice { color: #fbbf24; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>NEW DAY RP</h1>
+    <p>لوحة إدارة المالك: Hussain</p>
+    <p class="notice">وضع تجريبي — الأوامر لا تُنفّذ على السيرفر.</p>
+  </header>
+
+  <section class="card">
+    <h2>💰 بنك السيرفر</h2>
+    <label for="city">المدينة</label>
+    <select id="city">
+      <option>لوميتا</option>
+      <option>دافوك</option>
+      <option>نابار</option>
+    </select>
+    <input id="player" placeholder="اسم اللاعب">
+    <input id="amount" type="number" min="1" placeholder="المبلغ">
+    <button onclick="sendCash()">تجربة تحويل الأموال</button>
+  </section>
+
+  <section class="card">
+    <h2>👮 قيادة الشرطة</h2>
+    <select id="policeCity">
+      <option>لوميتا</option>
+      <option>دافوك</option>
+      <option>نابار</option>
+    </select>
+    <input id="officer" placeholder="اسم اللاعب">
+    <select id="rank">
+      <option value="Chief">قائد الشرطة</option>
+      <option value="Deputy">نائب قائد الشرطة</option>
+    </select>
+    <button onclick="appoint()">تجربة تعيين قائد</button>
+  </section>
+
+  <section class="card">
+    <h2>⛔ الحظر الإداري</h2>
+    <input id="banPlayer" placeholder="اسم اللاعب">
+    <input id="reason" placeholder="سبب الحظر">
+    <button class="danger" onclick="ban()">تجربة الحظر</button>
+  </section>
+
+  <script>
+    function sendCash() {
+      const player = document.getElementById('player').value.trim();
+      const amount = Number(document.getElementById('amount').value);
+      const city = document.getElementById('city').value;
+
+      if (!player || !Number.isFinite(amount) || amount <= 0) {
+        alert('أدخل اسم اللاعب ومبلغاً صحيحاً.');
+        return;
+      }
+
+      alert(`تجربة فقط: تحويل ${amount}$ إلى ${player} في ${city}.`);
+    }
+
+    function appoint() {
+      const player = document.getElementById('officer').value.trim();
+      const rank = document.getElementById('rank').value;
+      const city = document.getElementById('policeCity').value;
+
+      if (!player) {
+        alert('اكتب اسم اللاعب.');
+        return;
+      }
+
+      alert(`تجربة فقط: تعيين ${player} برتبة ${rank} في ${city}.`);
+    }
+
+    function ban() {
+      const player = document.getElementById('banPlayer').value.trim();
+      const reason = document.getElementById('reason').value.trim();
+
+      if (!player || !reason) {
+        alert('اكتب اسم اللاعب وسبب الحظر.');
+        return;
+      }
+
+      alert(`تجربة فقط: طلب حظر ${player}. السبب: ${reason}`);
+    }
+  </script>
+</body>
+</html>
